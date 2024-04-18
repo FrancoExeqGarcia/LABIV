@@ -10,6 +10,6 @@ namespace TODOLIST.Data.Entities
         public string UserName { get; set; } = "";
         public string Address { get; set; } = "";
         public bool State {  get; set; }
-        public ICollection<ToDo> ToDo { get; set; } = new List<ToDo>();
+        public ICollection<ToDoItem> ToDo { get; set; } = new List<ToDoItem>();
     }
 }

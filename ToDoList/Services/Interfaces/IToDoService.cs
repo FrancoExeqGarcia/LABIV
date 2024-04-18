@@ -6,10 +6,10 @@ namespace TODOLIST.Services.Interfaces
 {
     public interface IToDoService
     {
-        List<ToDo> GetAllToDos();
-        ToDo? GetTodoById(int todoId);
-        ToDo CreateTodo(ToDo toDo);
-        ToDo? UpdateTodo(int todoId, ToDo updatedTodo);
+        List<ToDoItem> GetAllToDos();
+        ToDoItem? GetTodoById(int todoId);
+        ToDoItem CreateTodo(ToDoItem toDo);
+        ToDoItem? UpdateTodo(int todoId, ToDoItem updatedTodo);
         bool DeleteTodo(int todoId);
     }
 }

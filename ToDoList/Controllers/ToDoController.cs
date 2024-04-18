@@ -21,14 +21,14 @@ namespace TODOLIST.Controllers
         }
 
         [HttpGet("/getalltodos")]
-        public ActionResult<IEnumerable<ToDo>> Get()
+        public ActionResult<IEnumerable<ToDoItem>> Get()
         {
             var todos = _todoService.GetAllToDos();
             return Ok(todos);
         }
 
         [HttpGet("/gettodobyid/{id}")]
-        public ActionResult<ToDo> GetToDo(int id)
+        public ActionResult<ToDoItem> GetToDo(int id)
         {
             var todo = _todoService.GetTodoById(id);
 
@@ -43,7 +43,7 @@ namespace TODOLIST.Controllers
         [HttpPost]
         public IActionResult CreateTodo([FromBody] ToDoCreateDto toDoCreateDto)
         {
-            var toDo = new ToDo
+            var toDo = new ToDoItem
             {
                 Title = toDoCreateDto.Title,
                 Description = toDoCreateDto.Description,
@@ -62,7 +62,7 @@ namespace TODOLIST.Controllers
         [HttpPut]
         public IActionResult UpdateToDo(int todoId,[FromBody] ToDoUpdateDto toDoUpdateDto)
         {
-            var updatedToDo = new ToDo
+            var updatedToDo = new ToDoItem
             {
                 Title = toDoUpdateDto.Title,
                 Description = toDoUpdateDto.Description,

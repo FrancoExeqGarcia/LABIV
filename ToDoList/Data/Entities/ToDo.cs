@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TODOLIST.Data.Entities
 {
-    public class ToDo
+    public class ToDoItem
     {
         public int ToDoId { get; set; }
         public string? Title { get; set; }
