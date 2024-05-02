@@ -4,9 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using TP_LABIV.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using TP_LABIV.Data.Entities;
+using TP_LABIV.Services.Implementations;
+using TP_LABIV.Services.Interfaces;
 
 namespace TP_LABIV
 {
@@ -16,13 +17,12 @@ namespace TP_LABIV
         {
             var builder = WebApplication.CreateBuilder(args);
 
-
+            // Registro de servicios
             builder.Services.AddControllers();
-
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(setupAction =>
             {
-                setupAction.AddSecurityDefinition("TaskMangerApiBearerAuth", new OpenApiSecurityScheme() //Esto va a permitir usar swagger con el token.
+                setupAction.AddSecurityDefinition("TaskMangerApiBearerAuth", new OpenApiSecurityScheme()
                 {
                     Type = SecuritySchemeType.Http,
                     Scheme = "Bearer",
@@ -30,22 +30,29 @@ namespace TP_LABIV
                 });
 
                 setupAction.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "TaskMangerApiBearerAuth" } //Tiene que coincidir con el id seteado arriba en la definición
-                }, new List<string>() }
-    });
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "TaskMangerApiBearerAuth" //Tiene que coincidir con el id seteado arriba en la definición
+                            }
+                        }, new List<string>()
+                    }
+                });
             });
-            // Configure DbContext with SQL Server connection string
+
+            // Configuración de DbContext con cadena de conexión SQLite
             builder.Services.AddDbContext<TodoContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
+
+            // Registro de implementaciones de servicios
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<ITodoItemService, ToDoService>();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
