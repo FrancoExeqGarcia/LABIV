@@ -1,0 +1,6 @@
+@TP_LABIV_HostAddress = http://localhost:5257
+
+GET {{TP_LABIV_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
