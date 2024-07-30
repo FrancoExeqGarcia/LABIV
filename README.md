@@ -4,10 +4,10 @@ Este es un backend para gestionar tareas ("todo items"). Permite crear, leer, ac
 
 ## Características
 
-POST /todos - Crea un nuevo todo item con un nombre y una fecha.
-GET /todos - Obtiene la lista de todos los todo items.
-GET /todos/{id} - Obtiene un todo item específico por ID.
-PUT /todos/{id} - Actualiza un todo item específico por ID.
+POST /todos - Crea un nuevo todo item con un nombre y una fecha.\
+GET /todos - Obtiene la lista de todos los todo items.\
+GET /todos/{id} - Obtiene un todo item específico por ID.\
+PUT /todos/{id} - Actualiza un todo item específico por ID.\
 DELETE /todos/{id} - Elimina un todo item específico por ID.
 
 ## Requisitos
